@@ -31,7 +31,8 @@ WORKDIR /var/www
 
 # --- 依存関係のインストール用ファイルのコピー ---
 # composer.json, composer.lock と package.json, package-lock.json（存在する場合）を先にコピーし、キャッシュを活用
-COPY composer.json composer.lock artisan bootstrap/ /var/www/
+COPY composer.json composer.lock artisan /var/www/
+COPY bootstrap/ /var/www/bootstrap/
 COPY package.json package-lock.json* /var/www/
 
 # 必要なファイルがコンテナ内にあることを確認（デバッグ用）
