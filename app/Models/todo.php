@@ -10,5 +10,5 @@ class todo extends Model
     /** @use HasFactory<\Database\Factories\TodoFactory> */
     use HasFactory;
 
-    protected $fillable = ['description'];
+    protected $fillable = ['description', 'completed'];
 }

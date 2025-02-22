@@ -12,7 +12,7 @@ class TodoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() //Shows all todos
     {
         $todos = todo::all();
         return view('todo.index', compact('todos'));
@@ -21,9 +21,9 @@ class TodoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() //create todo
+    public function create() //Not used
     {
-        return response()->json('test');
+        //
     }
 
     /**
@@ -31,31 +31,35 @@ class TodoController extends Controller
      */
     public function store(StoretodoRequest $request)
     {
-        //
+
+        $input = $request->all();
+        $todo = todo::create($input);
+        return redirect()->route('todos.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(todo $todo) //show 1 todo
+    public function show(todo $todo) //Shows 1 todo
     {
-        //
+        return view('todo.show', compact('todo'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(todo $todo) //edit 1 todo
+    public function edit(todo $todo) //Not used
     {
-        //
+        // return view('todo.edit', compact('todo'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatetodoRequest $request, todo $todo) //
+    public function update(UpdatetodoRequest $request, todo $todo) //Updates 1 todo
     {
-        //
+        $todo->update($request->all());
+        return redirect()->route('todos.update'.$todo->id);
     }
 
     /**
@@ -63,6 +67,7 @@ class TodoController extends Controller
      */
     public function destroy(todo $todo) //delete 1 todo
     {
-        //
+        $todo->delete();
+        return redirect()->route('todos.index');
     }
 }
