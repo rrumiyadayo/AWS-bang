@@ -39,14 +39,14 @@ COPY package.json package-lock.json* /var/www/
 RUN ls -la /var/www/bootstrap
 RUN ls -la /var/www
 
+# --- アプリケーションコード全体のコピー ---
+COPY . /var/www
+
 # --- PHP依存関係のインストール ---
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # --- Node.js依存関係のインストール ---
 RUN npm install
-
-# --- アプリケーションコード全体のコピー ---
-COPY . /var/www
 
 # --- ポート公開 ---
 # Laravelの開発サーバ（artisan serve）を8000番ポートで実行するので公開
