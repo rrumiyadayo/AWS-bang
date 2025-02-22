@@ -31,7 +31,7 @@ WORKDIR /var/www
 
 # --- 依存関係のインストール用ファイルのコピー ---
 # composer.json, composer.lock と package.json, package-lock.json（存在する場合）を先にコピーし、キャッシュを活用
-COPY composer.json composer.lock /var/www/
+COPY composer.json composer.lock artisan /var/www/
 COPY package.json package-lock.json* /var/www/
 
 # --- PHP依存関係のインストール ---
