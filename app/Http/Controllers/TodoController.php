@@ -34,7 +34,7 @@ class TodoController extends Controller
 
         $input = $request->all();
         $todo = todo::create($input);
-        return redirect()->route('dashboard');
+        return redirect()->route('todos.index');
     }
 
     /**
@@ -68,6 +68,6 @@ class TodoController extends Controller
     public function destroy(todo $todo) //delete 1 todo
     {
         $todo->delete();
-        return redirect()->route('dashboard');
+        return redirect()->route('todos.index');
     }
 }
