@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
 
 # --- Node.js のインストール ---
 # Node.jsをNodeSourceのセットアップスクリプトでインストールします（ここでは16.xを利用）
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
 
 # --- Composer のインストール ---
@@ -31,21 +31,22 @@ WORKDIR /var/www
 
 # --- 依存関係のインストール用ファイルのコピー ---
 # composer.json, composer.lock と package.json, package-lock.json（存在する場合）を先にコピーし、キャッシュを活用
-COPY composer.json composer.lock artisan bootstrap/ /var/www/
+COPY composer.json composer.lock artisan /var/www/
+COPY bootstrap/ /var/www/bootstrap/
 COPY package.json package-lock.json* /var/www/
 
 # 必要なファイルがコンテナ内にあることを確認（デバッグ用）
 RUN ls -la /var/www/bootstrap
 RUN ls -la /var/www
 
+# --- アプリケーションコード全体のコピー ---
+COPY . /var/www
+
 # --- PHP依存関係のインストール ---
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # --- Node.js依存関係のインストール ---
 RUN npm install
-
-# --- アプリケーションコード全体のコピー ---
-COPY . /var/www
 
 # --- ポート公開 ---
 # Laravelの開発サーバ（artisan serve）を8000番ポートで実行するので公開
