@@ -15,7 +15,7 @@ class TodoController extends Controller
     public function index() //Shows all todos
     {
         $todos = todo::all();
-        return view('todo.index', compact('todos'));
+        return view('dashboard', compact('todos'));
     }
 
     /**
@@ -34,7 +34,7 @@ class TodoController extends Controller
 
         $input = $request->all();
         $todo = todo::create($input);
-        return redirect()->route('todos.index');
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -59,7 +59,7 @@ class TodoController extends Controller
     public function update(UpdatetodoRequest $request, todo $todo) //Updates 1 todo
     {
         $todo->update($request->all());
-        return redirect()->route('todos.update'.$todo->id);
+        return redirect()->route('todos.update',$todo);
     }
 
     /**
@@ -68,6 +68,6 @@ class TodoController extends Controller
     public function destroy(todo $todo) //delete 1 todo
     {
         $todo->delete();
-        return redirect()->route('todos.index');
+        return redirect()->route('dashboard');
     }
 }
