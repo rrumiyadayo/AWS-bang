@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
 
 # --- Node.js のインストール ---
 # Node.jsをNodeSourceのセットアップスクリプトでインストールします（ここでは16.xを利用）
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
 
 # --- Composer のインストール ---
