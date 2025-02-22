@@ -21,9 +21,9 @@ class TodoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() //create todo
     {
-        //
+        return response()->json('test');
     }
 
     /**
@@ -37,7 +37,7 @@ class TodoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(todo $todo)
+    public function show(todo $todo) //show 1 todo
     {
         //
     }
@@ -45,7 +45,7 @@ class TodoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(todo $todo)
+    public function edit(todo $todo) //edit 1 todo
     {
         //
     }
@@ -53,7 +53,7 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatetodoRequest $request, todo $todo)
+    public function update(UpdatetodoRequest $request, todo $todo) //
     {
         //
     }
@@ -61,7 +61,7 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(todo $todo)
+    public function destroy(todo $todo) //delete 1 todo
     {
         //
     }
