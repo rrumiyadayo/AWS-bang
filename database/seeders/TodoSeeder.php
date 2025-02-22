@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TodoSeeder extends Seeder
 {
@@ -12,6 +13,15 @@ class TodoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('todos')->insert([
+            [
+            'description' => 'Learn Laravel',
+            'completed' => false,
+            ],
+            [
+            'description' => 'Learn Vue.js',
+            'completed' => false,
+            ]
+        ]);
     }
 }
