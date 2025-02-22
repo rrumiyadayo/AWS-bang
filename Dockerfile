@@ -34,6 +34,10 @@ WORKDIR /var/www
 COPY composer.json composer.lock artisan bootstrap/ /var/www/
 COPY package.json package-lock.json* /var/www/
 
+# 必要なファイルがコンテナ内にあることを確認（デバッグ用）
+RUN ls -la /var/www/bootstrap
+RUN ls -la /var/www
+
 # --- PHP依存関係のインストール ---
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
