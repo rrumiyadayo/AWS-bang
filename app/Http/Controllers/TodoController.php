@@ -55,8 +55,13 @@ class TodoController extends Controller
      */
     public function update(todo $todo) //Updates 1 todo
     {
-        $todo->update(request()->all());
-        return redirect()->route('todos.index',$todo);
+        $request = request()->all();
+        if (!request()->has('completed')) {
+            $request['completed'] = false;
+        }
+
+        $todo->update($request);
+        return redirect()->route('todos.index', $todo);
     }
 
     /**
