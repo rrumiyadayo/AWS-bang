@@ -20,39 +20,47 @@
                                 Add
                             </button>
                         </form>
-
                         <ul id="task-list" class="space-y-2">
                             @foreach ($todos as $todo)
                                 <li class="flex items-center justify-between bg-gray-50 p-3 rounded-md"
                                     data-todo-id="{{ $todo->id }}">
                                     <div class="flex items-center">
-                                        <form action="{{ route('todos.update', $todo) }}" method="POST">
+                                        <form action="{{ route('todos.update', $todo) }}" method="POST" class="mr-2">
                                             @csrf
                                             @method('PATCH')
                                             <input type="checkbox" name="completed"
-                                                class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
-                                                value="1" {{ $todo->completed ? 'checked' : '' }}>
+                                                class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 align-top"
+                                                value="1" {{ $todo->completed ? 'checked' : '' }}
+                                                onchange="this.form.submit()">
                                         </form>
                                         <span
-                                            class="ml-2 text-gray-800 {{ $todo->completed ? 'line-through text-gray-500' : '' }}">
+                                            class="ml-2 text-gray-800 task-description {{ $todo->completed ? 'line-through text-gray-500' : '' }}"
+                                            id="task-text-{{ $todo->id }}">
                                             {{ $todo->description }}
                                         </span>
-                                    </div>
-                                    <div class="flex space-x-2">
                                         <form action="{{ route('todos.update', $todo) }}" method="POST"
-                                            id="edit-form-{{ $todo->id }}" style="display: none;">
+                                            id="edit-form-{{ $todo->id }}" class="hidden flex items-center ml-2">
                                             @csrf
                                             @method('PATCH')
-                                            <input type="text" name="text" value="{{ $todo->description }}"
-                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            <input type="text" name="description" value="{{ $todo->description }}"
+                                                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm"
                                                 required>
-                                            <button type="submit"
-                                                class="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                                Save
-                                            </button>
+                                            <div class="flex space-x-2 ml-2">
+                                                <button type="submit"
+                                                    class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline text-sm">
+                                                    Save
+                                                </button>
+                                                <button type="button" onclick="toggleEditForm({{ $todo->id }})"
+                                                    class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline text-sm">
+                                                    Cancel
+                                                </button>
+                                            </div>
                                         </form>
+                                    </div>
+                                    <div class="flex space-x-2">
                                         <button type="button" onclick="toggleEditForm({{ $todo->id }})"
-                                            class="text-blue-500 hover:text-blue-700 focus:outline-none edit-btn transform -translate-y-1">
+                                            class="text-blue-500 hover:text-blue-700 focus:outline-none edit-btn "
+                                            id="edit-button-{{ $todo->id }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -63,7 +71,9 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="text-red-500 hover:text-red-700 focus:outline-none delete-btn">
+                                                class="text-red-500 hover:text-red-700 focus:outline-none delete-btn align-middle"
+                                                id="delete-button-{{ $todo->id }}"
+                                                >
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                                     viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -80,4 +90,46 @@
             </div>
         </div>
     </div>
+    <script>
+        let currentlyOpenEditFormId = null;
+
+        function toggleEditForm(todoId) {
+            const editForm = document.getElementById(`edit-form-${todoId}`);
+            const taskText = document.getElementById(`task-text-${todoId}`);
+            const editButton = document.getElementById(`edit-button-${todoId}`);
+            const removeButton = document.getElementById(`delete-button-${todoId}`);
+
+            // Close any currently open edit form if it's not the current one
+            if (currentlyOpenEditFormId !== null && currentlyOpenEditFormId !== todoId) {
+                const previouslyOpenEditForm = document.getElementById(`edit-form-${currentlyOpenEditFormId}`);
+                const previouslyOpenTaskText = document.getElementById(`task-text-${currentlyOpenEditFormId}`);
+                const previouslyOpenEditButton = document.getElementById(`edit-button-${currentlyOpenEditFormId}`);
+                const previouslyOpenRemoveButton = document.getElementById(`delete-button-${currentlyOpenEditFormId}`);
+
+                if (previouslyOpenEditForm && !previouslyOpenEditForm.classList.contains('hidden')) {
+                    previouslyOpenEditForm.classList.add('hidden');
+                    previouslyOpenEditForm.classList.remove('flex');
+                    previouslyOpenTaskText.classList.remove('hidden');
+                    previouslyOpenEditButton.classList.remove('hidden');
+                    previouslyOpenRemoveButton.classList.remove('hidden');
+                }
+            }
+
+            if (editForm.classList.contains('hidden')) {
+                editForm.classList.remove('hidden');
+                editForm.classList.add('flex');
+                taskText.classList.add('hidden');
+                editButton.classList.add('hidden');
+                removeButton.classList.add('hidden');
+                currentlyOpenEditFormId = todoId;
+            } else {
+                editForm.classList.add('hidden');
+                editForm.classList.remove('flex');
+                taskText.classList.remove('hidden');
+                editButton.classList.remove('hidden');
+                removeButton.classList.remove('hidden');
+                currentlyOpenEditFormId = null;
+            }
+        }
+    </script>
 @endsection
