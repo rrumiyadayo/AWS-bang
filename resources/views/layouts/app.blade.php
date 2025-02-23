@@ -17,25 +17,25 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="flex flex-col min-h-screen bg-gray-100">
         @include('layouts.navigation')
+        <div class="flex-1">
+            <!-- Page Heading -->
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    @yield('header')
+                </div>
+            </header>
 
-        <!-- Page Heading -->
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                @yield('header')
-            </div>
-        </header>
-
-        <!-- Page Content -->
-        <main>
-            @yield('content')
-        </main>
-
+            <!-- Page Content -->
+            <main>
+                @yield('content')
+            </main>
+        </div>
         <!-- Footer -->
         <footer class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                Footer
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
+                Copyright 2025 aws-bang©. All Rights Reserved.
             </div>
         </footer>
     </div>
