@@ -13,7 +13,7 @@
                         <h1 class="text-2xl font-bold mb-4 text-gray-800">My To-Do List</h1>
                         <form action="{{ route('todos.store') }}" method="POST" class="flex items-center mb-4">
                             @csrf
-                            <input type="text" name="text" id="new-task" placeholder="Add a new task..."
+                            <input type="text" name="description" id="new-task" placeholder="Add a new task..."
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             <button type="submit"
                                 class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
