@@ -31,6 +31,7 @@ class TodoController extends Controller
     {
         $input = request()->all();
         $todo = todo::create($input);
+        session()->flash('success', 'Todo を追加しました。');
         return redirect()->route('todos.index');
     }
 
@@ -61,6 +62,7 @@ class TodoController extends Controller
         }
 
         $todo->update($request);
+        session()->flash('success', 'Todo を更新しました。');
         return redirect()->route('todos.index', $todo);
     }
 
@@ -70,6 +72,7 @@ class TodoController extends Controller
     public function destroy(todo $todo) //delete 1 todo
     {
         $todo->delete();
+        session()->flash('success', 'Todo を削除しました。');
         return redirect()->route('todos.index');
     }
 }

@@ -72,6 +72,7 @@
                                             @method('DELETE')
                                             <button type="submit"
                                                 class="text-red-500 hover:text-red-700 focus:outline-none delete-btn align-middle"
+                                                data-name="{{ $todo->description }}"
                                                 id="delete-button-{{ $todo->id }}"
                                                 >
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -90,46 +91,4 @@
             </div>
         </div>
     </div>
-    <script>
-        let currentlyOpenEditFormId = null;
-
-        function toggleEditForm(todoId) {
-            const editForm = document.getElementById(`edit-form-${todoId}`);
-            const taskText = document.getElementById(`task-text-${todoId}`);
-            const editButton = document.getElementById(`edit-button-${todoId}`);
-            const removeButton = document.getElementById(`delete-button-${todoId}`);
-
-            // Close any currently open edit form if it's not the current one
-            if (currentlyOpenEditFormId !== null && currentlyOpenEditFormId !== todoId) {
-                const previouslyOpenEditForm = document.getElementById(`edit-form-${currentlyOpenEditFormId}`);
-                const previouslyOpenTaskText = document.getElementById(`task-text-${currentlyOpenEditFormId}`);
-                const previouslyOpenEditButton = document.getElementById(`edit-button-${currentlyOpenEditFormId}`);
-                const previouslyOpenRemoveButton = document.getElementById(`delete-button-${currentlyOpenEditFormId}`);
-
-                if (previouslyOpenEditForm && !previouslyOpenEditForm.classList.contains('hidden')) {
-                    previouslyOpenEditForm.classList.add('hidden');
-                    previouslyOpenEditForm.classList.remove('flex');
-                    previouslyOpenTaskText.classList.remove('hidden');
-                    previouslyOpenEditButton.classList.remove('hidden');
-                    previouslyOpenRemoveButton.classList.remove('hidden');
-                }
-            }
-
-            if (editForm.classList.contains('hidden')) {
-                editForm.classList.remove('hidden');
-                editForm.classList.add('flex');
-                taskText.classList.add('hidden');
-                editButton.classList.add('hidden');
-                removeButton.classList.add('hidden');
-                currentlyOpenEditFormId = todoId;
-            } else {
-                editForm.classList.add('hidden');
-                editForm.classList.remove('flex');
-                taskText.classList.remove('hidden');
-                editButton.classList.remove('hidden');
-                removeButton.classList.remove('hidden');
-                currentlyOpenEditFormId = null;
-            }
-        }
-    </script>
 @endsection
