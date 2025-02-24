@@ -14,7 +14,8 @@
                         <form action="{{ route('todos.store') }}" method="POST" class="flex items-center mb-4">
                             @csrf
                             <input type="text" name="description" id="new-task" placeholder="Add a new task..."
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                required>
                             <button type="submit"
                                 class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                 Add
@@ -73,8 +74,7 @@
                                             <button type="submit"
                                                 class="text-red-500 hover:text-red-700 focus:outline-none delete-btn align-middle"
                                                 data-name="{{ $todo->description }}"
-                                                id="delete-button-{{ $todo->id }}"
-                                                >
+                                                id="delete-button-{{ $todo->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                                     viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
