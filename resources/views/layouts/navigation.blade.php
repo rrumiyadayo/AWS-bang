@@ -7,20 +7,15 @@
                 </a>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
-                    <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
-                    <a href="#" class="text-gray-600 hover:text-gray-900">Services</a>
-                    <a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>
+                    <a href="https://github.com/rrumiyadayo/AWS-bang" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-900">GitHub</a>
+                    <a href="#" data-modal-trigger="about" class="text-gray-600 hover:text-gray-900">情報</a>
+                    <a href="#" data-modal-trigger="contact" class="text-gray-600 hover:text-gray-900">連絡先</a>
                 </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                @auth
-                    <a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-gray-900">Dashboard</a>
-                @else
-                    <a href="#" class="text-gray-600 hover:text-gray-900">Login</a>
-                    <a href="#" class="ml-4 text-gray-600 hover:text-gray-900">Register</a>
-                @endauth
+                <a href="#" data-development="true" class="text-gray-600 hover:text-gray-900">ログイン</a>
+                <a href="#" data-development="true" class="ml-4 text-gray-600 hover:text-gray-900">登録</a>
             </div>
         </div>
     </div>
