@@ -27,6 +27,14 @@ function setupSweetAlert() {
                 title = "Todoリストアプリについて";
                 html =
                     "<p>これはシンプルなTodoリストアプリケーションです。</p>";
+                const featureIcons = {
+                    add: '➕',
+                    complete: '✅',
+                    edit: '✏️',
+                    delete: '🗑️',
+                    filter: '🔍',
+                    darkMode: '🌙'
+                };
             } else if (modalType === "contact") {
                 title = "連絡先";
                 html = `<p>チームメンバー:</p><br>
