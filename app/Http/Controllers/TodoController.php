@@ -29,8 +29,12 @@ class TodoController extends Controller
      */
     public function store()
     {
-        $input = request()->all();
-        $todo = todo::create($input);
+        $validated = request()->validate([
+            'description' => 'required',
+            // 'completed' attribute is not part of the form
+        ]);
+
+        $todo = todo::create($validated);
         session()->flash('success', 'Todo を追加しました。');
         return redirect()->route('todos.index');
     }
@@ -56,12 +60,12 @@ class TodoController extends Controller
      */
     public function update(todo $todo) //Updates 1 todo
     {
-        $request = request()->all();
-        if (!request()->has('completed')) {
-            $request['completed'] = false;
-        }
+        $validated = request()->validate([
+            'description' => 'required',
+            'completed' => 'boolean',
+        ]);
 
-        $todo->update($request);
+        $todo->update($validated);
         session()->flash('success', 'Todo を更新しました。');
         return redirect()->route('todos.index', $todo);
     }
