@@ -25,8 +25,6 @@ function setupSweetAlert() {
 
             if (modalType === "about") {
                 title = "Todoリストアプリについて";
-                html =
-                    "<p>これはシンプルなTodoリストアプリケーションです。</p>";
                 const featureIcons = {
                     add: '➕',
                     complete: '✅',
@@ -35,6 +33,18 @@ function setupSweetAlert() {
                     filter: '🔍',
                     darkMode: '🌙'
                 };
+                html = `
+                        <p>これはシンプルなTodoリストアプリケーションです。</p>
+                        <p class='mt-4 mb-2'>主な機能：</p>
+                        <ul class='text-left pl-4'>
+                            <li>${featureIcons.add} タスクの追加</li>
+                            <li>${featureIcons.complete} タスクの完了</li>
+                            <li>${featureIcons.edit} タスクの編集</li>
+                            <li>${featureIcons.delete} タスクの削除</li>
+                            <li>${featureIcons.filter} タスクのフィルタリング</li>
+                            <li>${featureIcons.darkMode} ダークモード</li>
+                        </ul>
+                    `;
             } else if (modalType === "contact") {
                 title = "連絡先";
                 html = `<p>チームメンバー:</p><br>
