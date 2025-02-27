@@ -4,9 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\todo;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 
 class TodoController extends Controller
 {
+    public function getAiResponse(string $prompt)
+    {
+        $apiKey = env('GEMINI_API_KEY');
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={$apiKey}";
+
+        $response = Http::post($url, [
+            'contents' => [
+                [
+                    'parts' => [
+                        ['text' => $prompt]
+                    ]
+                ]
+            ]
+        ]);
+
+        return $response->json();
+    }
+
     /**
      * Display a listing of the resource.
      */

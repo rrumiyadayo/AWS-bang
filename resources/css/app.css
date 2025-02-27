@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#ai-assistant-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 300px;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 50;
+}
+
+#ai-assistant-sidebar.open {
+    transform: translateX(0);
+}
+
+#close-ai-assistant {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}

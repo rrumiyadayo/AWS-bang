@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\App;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', ['App\Http\Controllers\TodoController', 'index']);
+Route::get('/', [TodoController::class, 'index']);
 
-Route::resource('todos', 'App\Http\Controllers\TodoController');
+Route::resource('todos', TodoController::class);
+
+Route::post('/ai-response', [TodoController::class, 'getAiResponse']);
