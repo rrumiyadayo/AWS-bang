@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\todo;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class TodoController extends Controller
 {
-    public function getAiResponse(string $prompt)
+    public function getAiResponse(string $prompt, string $model = 'gemini-2.0-flash')
     {
-        $apiKey = env('GEMINI_API_KEY');
-        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={$apiKey}";
+        $apiKey = env('AI_API_KEY');
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$apiKey}";
 
         $response = Http::post($url, [
             'contents' => [
@@ -22,6 +23,18 @@ class TodoController extends Controller
                 ]
             ]
         ]);
+
+        if (!$response->successful()) {
+            Log::error('Gemini API Error', [
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ]);
+            return [
+                'error' => 'Failed to get AI response',
+                'status_code' => $response->status(),
+                'error_details' => $response->json(),
+            ];
+        }
 
         return $response->json();
     }
