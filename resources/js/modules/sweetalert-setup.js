@@ -27,8 +27,8 @@ export function setupSweetAlert() {
                             <li>${featureIcons.complete} タスクの完了</li>
                             <li>${featureIcons.edit} タスクの編集</li>
                             <li>${featureIcons.delete} タスクの削除</li>
-                            <li>${featureIcons.filter} タスクのフィルタリング</li>
-                            <li>${featureIcons.darkMode} ダークモード</li>
+                            <li>${featureIcons.filter} タスクのフィルタリング　（開発中）</li>
+                            <li>${featureIcons.darkMode} ダークモード　（開発中）</li>
                         </ul>
                     `;
             } else if (modalType === "contact") {
