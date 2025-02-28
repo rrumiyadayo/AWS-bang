@@ -111,11 +111,16 @@ class TodoController extends Controller
     public function update(todo $todo) //Updates 1 todo
     {
         $validated = request()->validate([
-            'description' => 'required',
-            'completed' => 'boolean',
+            'description' => 'sometimes|required|string',
+            'completed'   => 'sometimes|required|boolean',
         ]);
 
         $todo->update($validated);
+
+        if (request()->has('completed')) {
+            return redirect()->route('todos.index', $todo);
+        };
+
         session()->flash('success', 'Todo を更新しました。');
         return redirect()->route('todos.index', $todo);
     }

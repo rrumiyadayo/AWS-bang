@@ -50,9 +50,10 @@
                                             @csrf
                                             @method('PATCH')
                                             <input type="checkbox" name="completed"
-                                                class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 align-top"
-                                                value="1" {{ $todo->completed ? 'checked' : '' }}
-                                                onchange="this.form.submit()">
+                                                   class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 align-top"
+                                                   value="1" {{ $todo->completed ? 'checked' : '' }}
+                                                   onchange="this.form.submit()">
+                                            <input type="hidden" name="completed" value="0" {{ $todo->completed ? '' : 'disabled' }}>
                                         </form>
                                         <span
                                             class="ml-2 text-gray-800 task-description {{ $todo->completed ? 'line-through text-gray-500' : '' }}"
