@@ -36,7 +36,25 @@ class TodoController extends Controller
             ];
         }
 
-        return $response->json();
+
+        $jsonResponse = $response->json();
+
+        if (
+            isset($jsonResponse['candidates']) &&
+            is_array($jsonResponse['candidates']) &&
+            count($jsonResponse['candidates']) > 0 &&
+            isset($jsonResponse['candidates'][0]['content']['parts']) &&
+            is_array($jsonResponse['candidates'][0]['content']['parts']) &&
+            count($jsonResponse['candidates'][0]['content']['parts']) > 0 &&
+            isset($jsonResponse['candidates'][0]['content']['parts'][0]['text'])
+        ) {
+            return $jsonResponse['candidates'][0]['content']['parts'][0]['text'];
+        } else {
+            Log::error('Unexpected Gemini API Response', [
+                'response' => $jsonResponse,
+            ]);
+            return 'Error: Could not extract AI response.';
+        }
     }
 
     /**
