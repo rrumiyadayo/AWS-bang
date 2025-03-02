@@ -9,13 +9,15 @@
             </button>
         </div>
         <div class="mb-4">
-            <p class="text-sm text-gray-600">What do you feel like achieving today? I will try and come up with atomic sized tasks to achieve that goal.</p>
+            <p class="text-sm text-gray-600">What do you feel like achieving today? I will try and come up with an atomic sized tasks to achieve that goal.</p>
         </div>
         <div class="hidden">
             <input type="text" id="ai-assistant-input" class="w-full border rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your goal..." />
             <button id="ai-assistant-submit" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Get Suggestions</button>
         </div>
         <div id="ai-assistant-response" class="mt-4 hidden"></div>
-        @livewire('chatbot')
+        <div class="overflow-y-auto" style="height: 20rem">
+            @livewire('chatbot')
+        </div>
     </div>
 </div>
